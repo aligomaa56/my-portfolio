@@ -1,0 +1,21 @@
+{
+  "name": "Ali Gomaa - Software Engineer",
+  "short_name": "Ali Gomaa",
+  "description": "Personal portfolio of Ali Gomaa, Software Engineer specializing in backend development",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": [
+    {
+      "src": "/public/icons/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/icons/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 
