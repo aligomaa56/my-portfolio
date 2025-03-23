@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ali Gomaa - Software Engineer specializing in backend development">
+  <meta name="author" content="Ali Gomaa">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  
+  <!-- Security meta tags -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  
+  <title>Ali Gomaa | Software Engineer</title>
+  
+  <!-- Preload critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="public/profile.jpg" as="image">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script defer src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          screens: {
+            'xs': '480px',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark bg-black text-white font-inter">
+  <main class="min-h-screen px-4 sm:px-6 py-6 sm:py-8 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto transition-colors duration-300">
+    <!-- Header -->
+    <header class="relative mb-8 sm:mb-10">
+      <div class="absolute inset-0 rounded-full backdrop-blur-sm bg-white bg-opacity-10 shadow-lg dark:shadow-[0_4px_16px_-2px_rgba(255,255,255,0.1)] light:shadow-[0_4px_16px_-2px_rgba(0,0,0,0.1)]"></div>
+      <nav class="relative flex justify-between items-center py-1.5 px-3 sm:px-4">
+        <div class="flex gap-1 sm:gap-2">
+          <a href="https://github.com/aligomaa56" target="_blank" rel="noopener noreferrer" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="GitHub" data-tooltip="My GitHub Profile">
+            <img src="public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
+          </a>
+          <a href="https://www.linkedin.com/in/aligomaa15/" target="_blank" rel="noopener noreferrer" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="LinkedIn" data-tooltip="Connect on LinkedIn">
+            <img src="public/icons/linkedin.svg" alt="LinkedIn" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
+          </a>
+          <a href="https://x.com/aliigomaa_" target="_blank" rel="noopener noreferrer" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="Twitter/X" data-tooltip="Follow on Twitter">
+            <img src="public/icons/X.svg" alt="Twitter/X" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
+          </a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="theme-toggle" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="Toggle theme" data-tooltip="Switch Light/Dark Mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 sm:h-3.5 sm:w-3.5 sun-icon" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="m4.93 4.93 1.41 1.41"></path>
+              <path d="m17.66 17.66 1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="m6.34 17.66-1.41 1.41"></path>
+              <path d="m19.07 4.93-1.41 1.41"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3 sm:h-3.5 sm:w-3.5 moon-icon hidden" aria-hidden="true">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+            </svg>
+          </button>
+          <a href="mailto:alielsayedgomaa@gmail.com" class="text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 sm:gap-1.5 text-white hover:bg-white hover:bg-opacity-10 top-icon" data-tooltip="Contact Me Directly">
+            <img src="public/icons/mail.svg" alt="" aria-hidden="true" class="h-3 w-3.5 sm:h-4 sm:w-4.5" width="16" height="16">
+            <span class="inline">GET IN TOUCH</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- About Section -->
+    <section class="mb-10 sm:mb-12 fade-in opacity-0" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">ABOUT</h2>
+      <div class="relative">
+        <div class="float-none sm:float-right mx-auto sm:mx-0 sm:ml-3 mb-4 sm:mb-2 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 relative rounded-full profile-image-container">
+          <div class="rounded-full overflow-hidden w-full h-full">
+            <a href="https://x.com/aliigomaa_" target="_blank" rel="noopener noreferrer" aria-label="Profile on X/Twitter">
+              <img src="public/profile.jpg" alt="Ali Gomaa profile picture" class="object-cover w-full h-full profile-image" width="160" height="160" fetchpriority="high">
+            </a>
+          </div>
+          
+          <!-- Status icon that expands in-place -->
+          <div class="status-icon">
+            <span class="status-emoji">🧠</span>
+            <span class="status-text">Curious mind</span>
+          </div>
+        </div>
+        <div class="space-y-3 sm:space-y-4 clear-both sm:clear-none">
+          <p class="text-sm md:text-base">
+            <span class="font-medium typing-text"></span>
+            <span class="animate-blink typing-cursor" aria-hidden="true">|</span>
+          </p>
+          <p class="text-sm md:text-base max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl">
+            I spend my days building systems that keep everything running smoothly behind the scenes. My journey took
+            a major turn thanks to <a href="https://www.alxafrica.com" class="underline hover:text-gray-300 transition-colors text-white" target="_blank" rel="noopener noreferrer">ALX</a> Academy its rigorous 12-month program of daily projects, challenging tasks, and
+            mindset training completely reshaped how I approach software.
+          </p>
+          <p class="text-sm md:text-base max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl">
+            I've also worked on freelance projects, collaborating with various clients to create custom solutions for
+            real-world challenges. While I enjoy
+            <a href="https://github.com/aligomaa56/leetcode/tree/main/leet" class="underline hover:text-gray-300 transition-colors text-white" target="_blank" rel="noopener noreferrer">problem solving</a>, what excites me is
+            diving deep into the details of software, understanding how everything works under the hood rather than
+            just running it.
+          </p>
+          <p class="text-sm md:text-base max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl">
+            When I'm not immersed in code, you'll often find me chasing new ideas and embracing the quirky, offbeat
+            side of programming. Every once in a while, a sudden flash of insight turns even the toughest challenges
+            into fun puzzles to solve.
+          </p>
+        </div>
+        <div class="clear-both"></div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="mb-10 sm:mb-12" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">PROJECTS</h2>
+
+      <div class="space-y-6 pl-2 sm:pl-6" id="projects-container">
+        <!-- Projects will be inserted here by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="fade-in opacity-0" style="animation-delay: 0.4s;" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">CONTACT</h2>
+      <div class="space-y-3">
+        <p class="text-xs sm:text-sm md:text-base max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl">
+          I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel
+          free to reach out via my social media profiles. View my
+          <a href="public/cv/resume.pdf" class="underline hover:text-gray-300 transition-colors text-white">CV</a>
+          for more details about my experience.
+        </p>
+
+        <div class="text-xs sm:text-sm text-green-400 flex items-center gap-2">
+          <span class="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3" aria-hidden="true">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-green-500"></span>
+          </span>
+          Currently available for new opportunities.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="script.js"></script>
+</body>
+</html>
