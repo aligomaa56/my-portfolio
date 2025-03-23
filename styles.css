@@ -1,0 +1,597 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    font-display: swap;
+  }
+  
+  :root {
+    /* Color variables */
+    --text-primary-light: #1e293b;
+    --text-secondary-light: #4b5563;
+    --text-dark-light: #111827;
+    --background-light: #ffffffe0;
+    --background-dark: #080808f8;
+    --text-primary-dark: #ffffff;
+    --accent-light: rgba(102, 112, 124, 0.2);
+    --accent-hover-light: rgba(203, 213, 225, 0.6);
+    --accent-dark: rgba(255, 255, 255, 0.05);
+    
+    /* Shadow variables */
+    --shadow-light: 0 4px 16px -2px rgba(0, 0, 0, 0.1), 0 2px 8px -1px rgba(0, 0, 0, 0.05);
+    --shadow-dark: 0 4px 16px -2px rgba(255, 255, 255, 0.1), 0 2px 8px -1px rgba(255, 255, 255, 0.05);
+    --profile-shadow-light: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    --profile-shadow-dark: 0 10px 25px -5px rgba(255, 255, 255, 0.051);
+    --profile-shadow-hover-light: 0 15px 30px -8px rgba(0, 0, 0, 0.4);
+    --profile-shadow-hover-dark: 0 15px 30px -8px rgba(255, 255, 255, 0.08);
+    
+    /* Animation variables */
+    --transition-standard: all 0.3s ease;
+    --animation-timing: 0.8s ease-out forwards;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Background pattern */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('public/icons/background.svg');
+    background-repeat: repeat;
+    background-position: center top;
+    background-size: 650px auto;
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+    will-change: opacity, filter;
+  }
+  
+  /* Main content container alignment */
+  .content-container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  body.light {
+    background-color: var(--background-light);
+    color: var(--text-primary-light);
+  }
+  
+  body.light::before {
+    opacity: 1;
+    filter: brightness(0.1) contrast(0.3);
+  }
+  
+  body.light a {
+    color: var(--text-primary-light);
+  }
+  
+  body.light a:hover {
+    color: var(--text-secondary-light);
+  }
+  
+  body.light a.underline {
+    text-decoration-color: rgba(75, 85, 99, 0.4);
+    color: var(--text-primary-light);
+  }
+  
+  body.light a.underline:hover {
+    color: var(--text-secondary-light);
+    text-decoration-color: var(--text-secondary-light);
+  }
+  
+  body.light header .absolute {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    box-shadow: var(--shadow-light);
+  }
+  
+  body.light button, 
+  body.light a.rounded-full {
+    color: #334155;
+  }
+  
+  body.light button:hover, 
+  body.light a.rounded-full:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--text-dark-light);
+  }
+  
+  /* Make header icons darker in light mode */
+  body.light header img {
+    filter: brightness(0.2);
+  }
+  
+  body.light .dark-icon {
+    filter: brightness(0.2) !important;
+  }
+  
+  body.light .profile-image {
+    filter: none;
+  }
+  
+  body.light .project-title {
+    color: var(--text-primary-light);
+  }
+  
+  body.light .project-description {
+    color: var(--text-primary-light);
+  }
+  
+  body.light .project-details p {
+    color: var(--text-secondary-light);
+  }
+  
+  body.light .project-icon-bg {
+    background-color: var(--accent-light);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  body.light .project-icon-bg svg {
+    stroke: var(--text-dark-light);
+    stroke-width: 2.5;
+  }
+  
+  body.light span.bg-white.bg-opacity-10 {
+    background-color: var(--accent-light);
+    color: var(--text-primary-light);
+    border: none;
+  }
+  
+  body.light .skills-toggle {
+    background-color: var(--accent-light);
+    color: #334155;
+  }
+  
+  body.light .skills-toggle:hover {
+    background-color: var(--accent-hover-light);
+    text-decoration: none;
+    color: var(--text-dark-light);
+  }
+  
+  body.dark {
+    background-color: var(--background-dark);
+    color: var(--text-primary-dark);
+  }
+  
+  body.dark header .absolute {
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-dark);
+  }
+  
+  body.dark button, 
+  body.dark a.rounded-full {
+    color: var(--text-primary-dark);
+  }
+  
+  body.dark button:hover, 
+  body.dark a.rounded-full:hover {
+    background-color: var(--accent-dark);
+  }
+  
+  /* Remove filter for dark mode header icons */
+  body.dark header img {
+    filter: none;
+  }
+  
+  body.dark .dark-icon {
+    filter: none !important;
+  }
+  
+  body.dark .profile-image {
+    filter: grayscale(1);
+  }
+  
+  /* Profile image enhancements */
+  .profile-image-container {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    transition: var(--transition-standard);
+    animation: floatingImage 4s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+  
+  @keyframes floatingImage {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-7px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  body.light .profile-image-container {
+    box-shadow: var(--profile-shadow-light);
+  }
+  
+  body.dark .profile-image-container {
+    box-shadow: var(--profile-shadow-dark);
+  }
+  
+  .profile-image-container:hover {
+    animation-play-state: paused;
+    transform: translateY(-5px);
+    box-shadow: var(--profile-shadow-hover-light);
+  }
+  
+  body.dark .profile-image-container:hover {
+    box-shadow: var(--profile-shadow-hover-dark);
+  }
+  
+  .profile-image {
+    transform: scale(1.25);
+    object-position: center top;
+    filter: grayscale(1);
+    transition: var(--transition-standard);
+    will-change: filter;
+  }
+  
+  .profile-image-container:hover .profile-image {
+    filter: grayscale(0);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Separate animation for initial entrance */
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn var(--animation-timing);
+    will-change: opacity;
+  }
+  
+  .animate-blink {
+    animation: blink 1s infinite;
+    will-change: opacity;
+  }
+  
+  .fade-in {
+    opacity: 1;
+    animation: fadeIn var(--animation-timing);
+  }
+  
+  /* Project styles */
+  .project-item {
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+    opacity: 1; /* Ensure projects are visible by default */
+    position: relative;
+  }
+  
+  .project-item:hover {
+    transform: translateX(4px) !important; /* Force the hover effect */
+  }
+  
+  .project-item.active {
+    transform: scale(1.02);
+    transition: transform 0.15s ease-out;
+  }
+  
+  /* Project details handling */
+  .project-details {
+    max-height: 0;
+    overflow: hidden;
+    display: none;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.12s ease-out, transform 0.12s ease-out;
+  }
+  
+  .project-details.active {
+    display: block;
+    max-height: none;
+    overflow: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+  }
+  
+  /* Hidden skills container */
+  .hidden-skills {
+    display: none;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 0.12s ease-out, transform 0.12s ease-out;
+  }
+  
+  .hidden-skills:not(.hidden) {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
+  }
+  
+  /* Make project GitHub and external link icons darker in light mode */
+  body.light .project-item a img[src*="github"],
+  body.light .project-item a img[src*="link"] {
+    filter: brightness(0.2);
+  }
+  
+  /* For reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .profile-image-container {
+      animation: none;
+    }
+    
+    .animate-fadeIn,
+    .animate-blink {
+      animation: none;
+      opacity: 1;
+    }
+    
+    .profile-image-container:hover {
+      transform: none;
+    }
+    
+    /* Remove the hover effects for reduced motion */
+    .project-item:hover {
+      transform: none;
+    }
+    
+    .project-item.active {
+      transform: none;
+    }
+  }
+
+  body.dark a {
+    color: var(--text-primary-dark);
+  }
+
+  body.dark a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Special case for underlined links in dark mode */
+  body.dark a.underline {
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+    color: var(--text-primary-dark);
+  }
+
+  body.dark a.underline:hover {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration-color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Status icon styling */
+  .status-icon {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    padding: 0;
+    overflow: visible;
+  }
+  
+  .status-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  
+  .status-text {
+    position: absolute;
+    white-space: nowrap;
+    color: white;
+    font-size: 11px;
+    padding: 3px 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 12px;
+    top: 50%;
+    right: 100%;
+    margin-right: 6px;
+    border: 2px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-50%) translateX(10px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+  }
+  
+  @media (min-width: 640px) {
+    .status-icon {
+      height: 28px;
+      width: 28px;
+    }
+    
+    .status-emoji {
+      width: 24px;
+      height: 24px;
+      font-size: 14px;
+    }
+    
+    .status-text {
+      font-size: 12px;
+      padding: 4px 12px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .status-icon {
+      bottom: 8px;
+      left: 8px;
+    }
+  }
+  
+  .status-icon:hover .status-text {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  /* Apply different styling for the status icon based on theme */
+  body.light .status-icon {
+    background-color: rgba(0, 0, 0, 0.15);
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+  }
+  
+  
+  body.dark .status-icon {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+  }
+  
+  body.dark .status-text {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    font-weight: 500;
+  }
+  
+  body.light .status-text {
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color: #262626;
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    font-weight: 600;
+  }
+  
+  /* Enhanced professional tooltip styling */
+  [data-tooltip] {
+    position: relative;
+  }
+  
+  [data-tooltip]::before {
+    content: "";
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 101;
+    pointer-events: none;
+  }
+  
+  [data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    min-width: max-content;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  [data-tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%);
+    bottom: 120%;
+  }
+  
+  [data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  /* Light/dark mode variants with refined styling */
+  body.dark [data-tooltip]::before {
+    border-top-color: rgba(33, 33, 33, 0.95);
+  }
+  
+  body.dark [data-tooltip]::after {
+    background-color: rgba(33, 33, 33, 0.95);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  body.light [data-tooltip]::before {
+    border-top-color: rgba(50, 50, 50, 0.95);
+  }
+  
+  body.light [data-tooltip]::after {
+    background-color: rgba(50, 50, 50, 0.95);
+    color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Position adjustments for different elements */
+  .top-icon[data-tooltip]::before,
+  .top-icon[data-tooltip]::after {
+    bottom: 130%;
+  }
+  
+  .project-icon[data-tooltip]::before,
+  .project-icon[data-tooltip]::after {
+    bottom: 130%;
+  }
+  
+  .about-link[data-tooltip]::before,
+  .about-link[data-tooltip]::after {
+    bottom: 130%;
+  }
+  
+  /* Allow wider tooltips for project descriptions with improved styling */
+  .project-description[data-tooltip]::after {
+    width: max-content;
+    max-width: 200px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+
