@@ -1,0 +1,8 @@
+# Redirect old URLs to new ones if any
+# /old-page    /new-page    301
+
+# Redirect HTTP to HTTPS
+http://*    https://:splat    301!
+
+# Handle 404 errors
+/*    /404.html    404 
