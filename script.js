@@ -312,17 +312,17 @@ document.addEventListener('DOMContentLoaded', function() {
       const linksHTML = `
         <div class="flex items-center gap-0.5 ml-1">
           ${project.github ? `
-            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon" data-tooltip="View Source Code">
+            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon tooltip-container" data-tooltip="View Source Code">
               <img src="public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5" width="14" height="14">
             </a>
           ` : ''}
           ${project.demo ? `
-            <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon" data-tooltip="View Live Demo">
+            <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon tooltip-container" data-tooltip="View Live Demo">
               <img src="public/icons/link.svg" alt="Demo Link" class="h-3 w-3" width="12" height="12">
             </a>
           ` : ''}
           ${project.freelance ? `
-            <span class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon" data-tooltip="Freelance Project">
+            <span class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon tooltip-container" data-tooltip="Freelance Project">
               <img src="public/icons/freelance.svg" alt="Freelance Project" class="h-3.5 w-3.5" width="14" height="14">
             </span>
           ` : ''}
@@ -519,4 +519,38 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(item);
       });
     }
+  
+    // Initialize tooltips
+    const tooltipElements = document.querySelectorAll('[data-tooltip]');
+    
+    tooltipElements.forEach(element => {
+      // Refresh tooltip visibility
+      element.addEventListener('mouseenter', function() {
+        this.style.position = 'relative';
+      });
+    });
+    
+    // Fix freelance icon in light mode
+    if (document.body.classList.contains('light')) {
+      const freelanceIcons = document.querySelectorAll('img[src*="freelance"]');
+      freelanceIcons.forEach(icon => {
+        icon.style.filter = 'brightness(0.2)';
+      });
+    }
+    
+    // Apply theme change listener for icons
+    document.getElementById('theme-toggle').addEventListener('click', function() {
+      setTimeout(() => {
+        const freelanceIcons = document.querySelectorAll('img[src*="freelance"]');
+        if (document.body.classList.contains('light')) {
+          freelanceIcons.forEach(icon => {
+            icon.style.filter = 'brightness(0.2)';
+          });
+        } else {
+          freelanceIcons.forEach(icon => {
+            icon.style.filter = 'none';
+          });
+        }
+      }, 50);
+    });
   });
