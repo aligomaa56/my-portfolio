@@ -50,7 +50,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:jpg|jpeg|gif|png|svg|ico|webp)$",
+      "source": "/:path(.+)\\.(jpg|jpeg|gif|png|svg|ico|webp)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(?:css|js)$",
+      "source": "/:path(.+)\\.(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.pdf$",
+      "source": "/:path(.+)\\.pdf",
       "headers": [
         {
           "key": "Cache-Control",
