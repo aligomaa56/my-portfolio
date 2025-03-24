@@ -13,14 +13,58 @@
   
   <title>Page Not Found | Ali Gomaa - Software Engineer</title>
   
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <script defer src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/styles.css">
-  
+  <!-- Inline styles for the loader - this will be applied immediately -->
   <style>
+    #page-loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #080808;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    
+    #page-loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    body.light #page-loader {
+      background: #ffffff;
+    }
+    
+    body.light .spinner {
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-top-color: #080808;
+    }
+    
+    #content-wrapper {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    #content-wrapper.loaded {
+      opacity: 1;
+    }
+    
     /* Simple loading state to prevent FOUC */
     .preload * {
       -webkit-transition: none !important;
@@ -126,6 +170,13 @@
     }
   </style>
   
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script defer src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css">
+  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const themeToggle = document.getElementById('theme-toggle');
@@ -150,49 +201,88 @@
         localStorage.setItem('theme', newTheme);
       });
     });
-    
-    // Remove preload class when page is fully loaded
-    window.addEventListener('load', function() {
-      document.body.classList.remove('preload');
-    });
   </script>
 </head>
-<body class="dark bg-black text-white font-inter preload">
-  <!-- Theme toggle button -->
-  <div id="theme-toggle" class="theme-toggle">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon hidden">
-      <circle cx="12" cy="12" r="4"></circle>
-      <path d="M12 2v2"></path>
-      <path d="M12 20v2"></path>
-      <path d="m4.93 4.93 1.41 1.41"></path>
-      <path d="m17.66 17.66 1.41 1.41"></path>
-      <path d="M2 12h2"></path>
-      <path d="M20 12h2"></path>
-      <path d="m6.34 17.66-1.41 1.41"></path>
-      <path d="m19.07 4.93-1.41 1.41"></path>
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
-      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-    </svg>
+<body class="dark bg-black text-white font-inter">
+  <!-- Page loader -->
+  <div id="page-loader">
+    <div class="spinner"></div>
   </div>
-
-  <main class="min-h-screen flex flex-col items-center justify-center px-4 py-12 max-w-3xl mx-auto text-center">
-    <div class="error-container space-y-6">
-      <h1 class="error-code">404</h1>
-      <h2 class="text-xl sm:text-2xl font-medium">Page Not Found</h2>
-      <p class="text-sm md:text-base max-w-md mx-auto text-gray-300">
-        The page you're looking for doesn't exist or has been moved to another URL.
-      </p>
-      <div class="mt-8">
-        <a href="/" class="home-button inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="m12 19-7-7 7-7"></path>
-            <path d="M19 12H5"></path>
-          </svg>
-          Back to Home
-        </a>
-      </div>
+  
+  <!-- Content wrapper -->
+  <div id="content-wrapper">
+    <!-- Theme toggle button -->
+    <div id="theme-toggle" class="theme-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon hidden">
+        <circle cx="12" cy="12" r="4"></circle>
+        <path d="M12 2v2"></path>
+        <path d="M12 20v2"></path>
+        <path d="m4.93 4.93 1.41 1.41"></path>
+        <path d="m17.66 17.66 1.41 1.41"></path>
+        <path d="M2 12h2"></path>
+        <path d="M20 12h2"></path>
+        <path d="m6.34 17.66-1.41 1.41"></path>
+        <path d="m19.07 4.93-1.41 1.41"></path>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="moon-icon">
+        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+      </svg>
     </div>
-  </main>
+
+    <main class="min-h-screen flex flex-col items-center justify-center px-4 py-12 max-w-3xl mx-auto text-center">
+      <div class="error-container space-y-6">
+        <h1 class="error-code">404</h1>
+        <h2 class="text-xl sm:text-2xl font-medium">Page Not Found</h2>
+        <p class="text-sm md:text-base max-w-md mx-auto text-gray-300">
+          The page you're looking for doesn't exist or has been moved to another URL.
+        </p>
+        <div class="mt-8">
+          <a href="/" class="home-button inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white bg-opacity-10 hover:bg-opacity-15 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12 19-7-7 7-7"></path>
+              <path d="M19 12H5"></path>
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Inline script for loader -->
+  <script>
+    // Function to handle page loading
+    function handlePageLoad() {
+      const loader = document.getElementById('page-loader');
+      const contentWrapper = document.getElementById('content-wrapper');
+      
+      // Hide loader and show content
+      if (loader && contentWrapper) {
+        // Wait a little additional time to ensure all styles are applied
+        setTimeout(() => {
+          loader.classList.add('hidden');
+          contentWrapper.classList.add('loaded');
+          
+          // Remove loader after transition completes
+          setTimeout(() => {
+            loader.style.display = 'none';
+          }, 300);
+        }, 200);
+      }
+    }
+    
+    // Check if the document is already loaded
+    if (document.readyState === 'complete') {
+      handlePageLoad();
+    } else {
+      window.addEventListener('load', handlePageLoad);
+    }
+    
+    // Also trigger on DOMContentLoaded in case load event doesn't fire
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set a timeout to ensure we don't wait forever
+      setTimeout(handlePageLoad, 2000);
+    });
+  </script>
 </body>
 </html> 
