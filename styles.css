@@ -319,11 +319,11 @@
     transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
   }
   
-  /* Make project GitHub and external link icons darker in light mode */
+  /* Make project GitHub, link and freelance icons darker in light mode with higher specificity */
   body.light .project-item a img[src*="github"],
   body.light .project-item a img[src*="link"],
   body.light .project-item span img[src*="freelance"] {
-    filter: brightness(0.2);
+    filter: brightness(0.2) !important;
   }
   
   /* For reduced motion preference */
@@ -652,4 +652,71 @@
     padding: 5px 9px;
     line-height: 1.5;
     max-width: 150px;
+  }
+  
+  /* More specific tooltip styling for dark mode */
+  body.dark[class*="dark"] [data-tooltip]::after {
+    background-color: rgba(60, 60, 60, 0.95) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  }
+  
+  /* Ensure project icon tooltips appear with higher specificity */
+  .project-title a[data-tooltip]::after,
+  .project-title span[data-tooltip]::after,
+  .project-icon[data-tooltip]::after {
+    bottom: 135% !important;
+    font-size: 11px !important;
+    padding: 5px 9px !important;
+    min-width: max-content !important;
+    max-width: 150px !important;
+    line-height: 1.5 !important;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .project-title a[data-tooltip]:hover::after,
+  .project-title span[data-tooltip]:hover::after,
+  .project-icon[data-tooltip]:hover::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+
+  /* Additional tooltip container styling for better visibility */
+  .tooltip-container {
+    position: relative;
+  }
+  
+  .tooltip-container::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 135%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: rgba(50, 50, 50, 0.95);
+    color: white;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 1000;
+    pointer-events: none;
+    line-height: 1.5;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  body.dark .tooltip-container::after {
+    background-color: rgba(60, 60, 60, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  
+  .tooltip-container:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
   }
