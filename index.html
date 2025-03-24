@@ -9,6 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="theme-color" content="#080808" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <link rel="canonical" href="https://aligomaa.engineer/">
   
   <!-- Favicon -->
   <link rel="icon" href="/public/icons/favicon.png" type="image/png">
@@ -43,8 +44,31 @@
     }
   </script>
   <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    /* Simple loading state to prevent FOUC */
+    .preload * {
+      -webkit-transition: none !important;
+      -moz-transition: none !important;
+      -ms-transition: none !important;
+      -o-transition: none !important;
+      transition: none !important;
+    }
+    
+    /* Hide content until loaded */
+    .preload main {
+      opacity: 0;
+    }
+  </style>
+  
+  <script>
+    // Remove preload class when page is fully loaded
+    window.addEventListener('load', function() {
+      document.body.classList.remove('preload');
+    });
+  </script>
 </head>
-<body class="dark bg-black text-white font-inter">
+<body class="dark bg-black text-white font-inter preload">
   <main class="min-h-screen px-4 sm:px-6 py-6 sm:py-8 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto transition-colors duration-300">
     <!-- Header -->
     <header class="relative mb-8 sm:mb-10">
