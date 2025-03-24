@@ -399,19 +399,19 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="flex items-center gap-0.5 ml-1">
           ${project.github ? `
             <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon project-github-icon" aria-label="View Source Code" style="position:relative">
-              <img src="public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5" width="14" height="14">
+              <img src="./public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5" width="14" height="14">
               <div class="icon-tooltip" style="position:absolute;bottom:135%;left:50%;transform:translateX(-50%) translateY(10px);background-color:rgba(50,50,50,0.95);color:white;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;z-index:9999;pointer-events:none;transition:all 0.2s ease;text-align:center;border:1px solid rgba(255,255,255,0.15);">View Source Code</div>
             </a>
           ` : ''}
           ${project.demo ? `
             <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon project-demo-icon" aria-label="View Live Demo" style="position:relative">
-              <img src="public/icons/link.svg" alt="Demo Link" class="h-3 w-3" width="12" height="12">
+              <img src="./public/icons/link.svg" alt="Demo Link" class="h-3 w-3" width="12" height="12">
               <div class="icon-tooltip" style="position:absolute;bottom:135%;left:50%;transform:translateX(-50%) translateY(10px);background-color:rgba(50,50,50,0.95);color:white;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;z-index:9999;pointer-events:none;transition:all 0.2s ease;text-align:center;border:1px solid rgba(255,255,255,0.15);">View Live Demo</div>
             </a>
           ` : ''}
           ${project.freelance ? `
             <span class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon project-freelance-icon" aria-label="Freelance Project" style="position:relative">
-              <img src="public/icons/freelance.svg" alt="Freelance Project" class="h-3.5 w-3.5" width="14" height="14">
+              <img src="./public/icons/freelance.svg" alt="Freelance Project" class="h-3.5 w-3.5" width="14" height="14">
               <div class="icon-tooltip" style="position:absolute;bottom:135%;left:50%;transform:translateX(-50%) translateY(10px);background-color:rgba(50,50,50,0.95);color:white;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;z-index:9999;pointer-events:none;transition:all 0.2s ease;text-align:center;border:1px solid rgba(255,255,255,0.15);">Freelance Project</div>
             </span>
           ` : ''}

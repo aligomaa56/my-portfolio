@@ -12,8 +12,8 @@
   <link rel="canonical" href="https://aligomaa.engineer/">
   
   <!-- Favicon -->
-  <link rel="icon" href="/public/icons/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/public/icons/favicon.png">
+  <link rel="icon" href="./public/icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="./public/icons/favicon.png">
   
   <!-- Critical CSS for page loader - inline to prevent FOUC -->
   <style>
@@ -96,7 +96,7 @@
   </script>
   
   <!-- Security meta tags -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="X-XSS-Protection" content="1; mode=block">
@@ -107,7 +107,7 @@
   <!-- Preload critical resources -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="public/profile.jpg" as="image">
+  <link rel="preload" href="./public/profile.jpg" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <script defer src="https://cdn.tailwindcss.com"></script>
@@ -252,13 +252,13 @@
         <nav class="relative flex justify-between items-center py-1.5 px-3 sm:px-4">
           <div class="flex gap-1 sm:gap-2">
             <a href="https://github.com/aligomaa56" target="_blank" rel="noopener noreferrer" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="GitHub" data-tooltip="My GitHub Profile">
-              <img src="public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
+              <img src="./public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
             </a>
             <a href="https://www.linkedin.com/in/aligomaa15/" target="_blank" rel="noopener noreferrer" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="LinkedIn" data-tooltip="Connect on LinkedIn">
-              <img src="public/icons/linkedin.svg" alt="LinkedIn" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
+              <img src="./public/icons/linkedin.svg" alt="LinkedIn" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
             </a>
             <a href="https://x.com/aliigomaa_" target="_blank" rel="noopener noreferrer" class="p-1 sm:p-1.5 rounded-full w-6 h-6 sm:w-7 sm:h-7 flex items-center justify-center text-white hover:bg-white hover:bg-opacity-10 top-icon" aria-label="Twitter/X" data-tooltip="Follow on Twitter">
-              <img src="public/icons/X.svg" alt="Twitter/X" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
+              <img src="./public/icons/X.svg" alt="Twitter/X" class="h-3.5 w-3.5 sm:h-4 sm:w-4" width="16" height="16">
             </a>
           </div>
           <div class="flex items-center gap-2">
@@ -279,7 +279,7 @@
               </svg>
             </button>
             <a href="mailto:alielsayedgomaa@gmail.com" class="text-xs px-2 sm:px-3 py-1 sm:py-1.5 rounded-full flex items-center gap-1 sm:gap-1.5 text-white hover:bg-white hover:bg-opacity-10 top-icon" data-tooltip="Contact Me Directly">
-              <img src="public/icons/mail.svg" alt="" aria-hidden="true" class="h-3 w-3.5 sm:h-4 sm:w-4.5" width="16" height="16">
+              <img src="./public/icons/mail.svg" alt="" aria-hidden="true" class="h-3 w-3.5 sm:h-4 sm:w-4.5" width="16" height="16">
               <span class="inline">GET IN TOUCH</span>
             </a>
           </div>
@@ -293,7 +293,7 @@
           <div class="float-none sm:float-right mx-auto sm:mx-0 sm:ml-3 mb-4 sm:mb-2 w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 relative rounded-full profile-image-container">
             <div class="rounded-full overflow-hidden w-full h-full">
               <a href="https://x.com/aliigomaa_" target="_blank" rel="noopener noreferrer" aria-label="Profile on X/Twitter">
-                <img src="public/profile.jpg" alt="Ali Gomaa profile picture" class="object-cover w-full h-full profile-image" width="160" height="160" fetchpriority="high">
+                <img src="./public/profile.jpg" alt="Ali Gomaa profile picture" class="object-cover w-full h-full profile-image" width="160" height="160" fetchpriority="high">
               </a>
             </div>
             
