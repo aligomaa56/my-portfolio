@@ -913,3 +913,38 @@
     position: relative !important;
     z-index: 1;
   }
+
+  /* Typing text container styles */
+  .typing-text-container {
+    display: block;
+    height: 3em; /* Fixed height for 2 lines */
+    overflow: hidden;
+    position: relative;
+  }
+
+  .typing-text {
+    display: inline;
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+  }
+
+  /* Ensure cursor is positioned correctly */
+  .typing-cursor {
+    display: inline;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  /* Make typing container responsive */
+  @media (min-width: 768px) {
+    .typing-text-container {
+      height: 2.8em; /* Slightly smaller on larger screens */
+    }
+  }
+
+  @media (max-width: 480px) {
+    .typing-text-container {
+      height: 3.5em; /* Taller on mobile for smaller text */
+    }
+  }

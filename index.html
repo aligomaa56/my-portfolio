@@ -236,6 +236,47 @@
       display: none !important;
     }
   </style>
+  
+  <!-- Critical typing text styles -->
+  <style>
+    /* Fixed height container for typing text */
+    .typing-text-container {
+      display: block !important; 
+      height: 3em !important;
+      overflow: hidden !important;
+      position: relative !important;
+      max-width: 100% !important;
+      line-height: 1.5 !important;
+    }
+    
+    /* Ensure text wraps properly */
+    .typing-text {
+      display: inline !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+      position: relative !important;
+    }
+    
+    /* Cursor positioning */
+    .typing-cursor {
+      display: inline !important;
+      position: relative !important;
+      vertical-align: baseline !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .typing-text-container {
+        height: 2.8em !important;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .typing-text-container {
+        height: 3.5em !important;
+      }
+    }
+  </style>
 </head>
 <body class="dark bg-black text-white font-inter">
   <!-- Page loader -->
@@ -305,8 +346,11 @@
           </div>
           <div class="space-y-3 sm:space-y-4 clear-both sm:clear-none">
             <p class="text-sm md:text-base">
-              <span class="font-medium typing-text"></span>
-              <span class="animate-blink typing-cursor" aria-hidden="true">|</span>
+              <!-- Replace with fixed-height container that wraps the typing text -->
+              <span class="font-medium typing-text-container" style="display: block; height: 3em; overflow: hidden; position: relative; max-width: 100%;">
+                <span class="typing-text"></span>
+                <span class="animate-blink typing-cursor" aria-hidden="true">|</span>
+              </span>
             </p>
             <p class="text-sm md:text-base max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl">
               I spend my days building systems that keep everything running smoothly behind the scenes. My journey took
