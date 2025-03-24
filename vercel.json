@@ -8,9 +8,11 @@
   "github": {
     "silent": true
   },
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/$1" }
+  ],
+  "redirects": [
+    { "source": "/((?!.*\\.html$).*)", "has": [{ "type": "header", "key": "Accept", "value": "text/html" }], "destination": "/404.html", "statusCode": 404 }
   ],
   "headers": [
     {

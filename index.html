@@ -124,29 +124,6 @@
     }
   </script>
   <link rel="stylesheet" href="styles.css">
-  
-  <style>
-    /* Simple loading state to prevent FOUC */
-    .preload * {
-      -webkit-transition: none !important;
-      -moz-transition: none !important;
-      -ms-transition: none !important;
-      -o-transition: none !important;
-      transition: none !important;
-    }
-    
-    /* Hide content until loaded */
-    .preload main {
-      opacity: 0;
-    }
-  </style>
-  
-  <script>
-    // Remove preload class when page is fully loaded
-    window.addEventListener('load', function() {
-      document.body.classList.remove('preload');
-    });
-  </script>
 </head>
 <body class="dark bg-black text-white font-inter">
   <!-- Page loader -->
