@@ -11,22 +11,31 @@
   <link rel="icon" href="/public/icons/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="/public/icons/favicon.png">
   
-  <title>Page Not Found | Ali Gomaa - Software Engineer</title>
-  
-  <!-- Inline styles for the loader - this will be applied immediately -->
+  <!-- Critical CSS for page loader - inline to prevent FOUC -->
   <style>
+    /* Hide all content initially */
+    html.loading {
+      overflow: hidden;
+      height: 100%;
+    }
+    
+    /* Page loader styling */
     #page-loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #080808;
+      background-color: #080808;
+      z-index: 9999;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
       transition: opacity 0.3s ease;
+    }
+    
+    html.light #page-loader {
+      background-color: #ffffff;
     }
     
     #page-loader.hidden {
@@ -34,34 +43,34 @@
       pointer-events: none;
     }
     
+    /* Spinner animation */
     .spinner {
       width: 40px;
       height: 40px;
       border: 3px solid rgba(255, 255, 255, 0.1);
       border-radius: 50%;
       border-top-color: #ffffff;
-      animation: spin 1s ease-in-out infinite;
+      animation: spin 1s ease infinite;
     }
     
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    
-    body.light #page-loader {
-      background: #ffffff;
-    }
-    
-    body.light .spinner {
+    html.light .spinner {
       border: 3px solid rgba(0, 0, 0, 0.1);
       border-top-color: #080808;
     }
     
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    /* Main content visibility control */
     #content-wrapper {
       opacity: 0;
       transition: opacity 0.3s ease;
     }
     
-    #content-wrapper.loaded {
+    #content-wrapper.visible {
       opacity: 1;
     }
     
@@ -170,6 +179,24 @@
     }
   </style>
   
+  <!-- Prevent FOUC with instant execution script -->
+  <script>
+    // Add loading class immediately to prevent FOUC
+    document.documentElement.classList.add('loading');
+    
+    // Set theme early based on localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.classList.add(savedTheme);
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+  
+  <title>Page Not Found | Ali Gomaa - Software Engineer</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -256,33 +283,34 @@
       const loader = document.getElementById('page-loader');
       const contentWrapper = document.getElementById('content-wrapper');
       
+      // Remove loading class from html
+      document.documentElement.classList.remove('loading');
+      
       // Hide loader and show content
       if (loader && contentWrapper) {
-        // Wait a little additional time to ensure all styles are applied
+        // Add a slight delay to ensure all styles are applied
         setTimeout(() => {
           loader.classList.add('hidden');
-          contentWrapper.classList.add('loaded');
+          contentWrapper.classList.add('visible');
           
-          // Remove loader after transition completes
+          // Remove loader from DOM after transition completes
           setTimeout(() => {
-            loader.style.display = 'none';
-          }, 300);
-        }, 200);
+            if (loader.parentNode) {
+              loader.parentNode.removeChild(loader);
+            }
+          }, 350); // Slightly longer than transition duration
+        }, 100);
       }
     }
     
-    // Check if the document is already loaded
+    // Use multiple triggers to ensure the loader is removed
     if (document.readyState === 'complete') {
       handlePageLoad();
     } else {
       window.addEventListener('load', handlePageLoad);
+      // Fallback timeout to ensure page displays even if load event doesn't fire properly
+      setTimeout(handlePageLoad, 2500);
     }
-    
-    // Also trigger on DOMContentLoaded in case load event doesn't fire
-    document.addEventListener('DOMContentLoaded', function() {
-      // Set a timeout to ensure we don't wait forever
-      setTimeout(handlePageLoad, 2000);
-    });
   </script>
 </body>
 </html> 
