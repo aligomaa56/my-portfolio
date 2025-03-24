@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Page not found - Ali Gomaa - Software Engineer">
   <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://aligomaa.engineer/">
   
   <!-- Favicon -->
   <link rel="icon" href="/public/icons/favicon.png" type="image/png">
@@ -20,6 +21,20 @@
   <link rel="stylesheet" href="/styles.css">
   
   <style>
+    /* Simple loading state to prevent FOUC */
+    .preload * {
+      -webkit-transition: none !important;
+      -moz-transition: none !important;
+      -ms-transition: none !important;
+      -o-transition: none !important;
+      transition: none !important;
+    }
+    
+    /* Hide content until loaded */
+    .preload main {
+      opacity: 0;
+    }
+    
     /* Enhanced 404 page styling */
     .error-code {
       font-size: 9rem;
@@ -27,6 +42,7 @@
       line-height: 1;
       background: linear-gradient(135deg, #7f7fd5, #86a8e7, #91eae4);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.5rem;
     }
@@ -134,9 +150,14 @@
         localStorage.setItem('theme', newTheme);
       });
     });
+    
+    // Remove preload class when page is fully loaded
+    window.addEventListener('load', function() {
+      document.body.classList.remove('preload');
+    });
   </script>
 </head>
-<body class="dark bg-black text-white font-inter">
+<body class="dark bg-black text-white font-inter preload">
   <!-- Theme toggle button -->
   <div id="theme-toggle" class="theme-toggle">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="sun-icon hidden">
