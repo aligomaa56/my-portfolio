@@ -801,3 +801,49 @@
     white-space: nowrap;
     z-index: 1000;
   }
+
+  /* Direct tooltip implementation for project icons */
+  .project-icon {
+    position: relative;
+  }
+  
+  .icon-tooltip {
+    position: absolute;
+    bottom: 135%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: rgba(50, 50, 50, 0.95);
+    color: white;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 2000;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    line-height: 1.4;
+    text-align: center;
+    min-width: max-content;
+  }
+  
+  body.dark .icon-tooltip {
+    background-color: rgba(60, 60, 60, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+  
+  .project-icon:hover .icon-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+  
+  /* Light mode styles */
+  body.light .icon-tooltip {
+    background-color: rgba(50, 50, 50, 0.95);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
