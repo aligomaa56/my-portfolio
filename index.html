@@ -123,7 +123,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=1.1">
+  <link rel="stylesheet" href="styles.css?v=1.2">
   
   <style>
     /* Ensure tooltips are visible */
@@ -135,6 +135,39 @@
     [data-tooltip]:hover::after {
       opacity: 1 !important;
       visibility: visible !important;
+    }
+    
+    /* Critical tooltip styles to ensure they always work */
+    .tooltip-container {
+      position: relative !important;
+    }
+    
+    .tooltip-container::after {
+      content: attr(data-tooltip) !important;
+      position: absolute !important;
+      bottom: 135% !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(10px) !important;
+      background-color: rgba(50, 50, 50, 0.95) !important;
+      color: white !important;
+      padding: 5px 9px !important;
+      border-radius: 6px !important;
+      font-size: 11px !important;
+      white-space: nowrap !important;
+      z-index: 1000 !important;
+    }
+    
+    .tooltip-container:hover::after {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateX(-50%) translateY(0) !important;
+    }
+    
+    /* Project tooltip specific styles */
+    .project-icon.tooltip-container::after {
+      bottom: 135% !important;
+      min-width: max-content !important;
+      max-width: 150px !important;
     }
   </style>
 </head>
