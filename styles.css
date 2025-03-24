@@ -761,7 +761,7 @@
     visibility: hidden !important;
     z-index: 1000 !important;
     pointer-events: none !important;
-    transition: all 0.2s ease !important;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease !important;
     min-width: max-content !important;
     max-width: 150px !important;
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2) !important;
@@ -846,4 +846,70 @@
     background-color: rgba(50, 50, 50, 0.95);
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* Project icon tooltips - specifically targeting the three icon types */
+  .project-github-icon .icon-tooltip,
+  .project-demo-icon .icon-tooltip,
+  .project-freelance-icon .icon-tooltip {
+    position: absolute !important;
+    bottom: 135% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    background-color: rgba(50, 50, 50, 0.95) !important;
+    color: white !important;
+    padding: 5px 9px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    z-index: 2000 !important;
+    pointer-events: none !important;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    line-height: 1.4 !important;
+    text-align: center !important;
+    min-width: max-content !important;
+    max-width: 150px !important;
+  }
+  
+  /* Dark mode styles for project icon tooltips */
+  body.dark .project-github-icon .icon-tooltip,
+  body.dark .project-demo-icon .icon-tooltip,
+  body.dark .project-freelance-icon .icon-tooltip {
+    background-color: rgba(60, 60, 60, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  }
+  
+  /* Show tooltip on hover with high specificity */
+  .project-github-icon:hover .icon-tooltip,
+  .project-demo-icon:hover .icon-tooltip,
+  .project-freelance-icon:hover .icon-tooltip {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+
+  /* Remove all tooltip ::before pseudo-elements for project icons to avoid conflicts */
+  .project-github-icon::before,
+  .project-demo-icon::before,
+  .project-freelance-icon::before {
+    display: none !important;
+  }
+  
+  /* Remove all tooltip ::after pseudo-elements for project icons to avoid conflicts */
+  .project-github-icon::after,
+  .project-demo-icon::after,
+  .project-freelance-icon::after {
+    display: none !important;
+  }
+  
+  /* Make sure project icons are always positioned relative */
+  .project-github-icon,
+  .project-demo-icon,
+  .project-freelance-icon {
+    position: relative !important;
+    z-index: 1;
   }

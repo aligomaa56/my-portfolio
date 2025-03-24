@@ -152,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Update tooltip styles when theme changes
         setTimeout(() => {
+          // Update normal tooltips
           const inlineTooltips = document.querySelectorAll('.inline-tooltip');
           const iconTooltips = document.querySelectorAll('.icon-tooltip');
           
@@ -176,6 +177,26 @@ document.addEventListener('DOMContentLoaded', function() {
               tooltip.style.border = '1px solid rgba(255, 255, 255, 0.15)';
             });
           }
+          
+          // Direct project icon tooltip update
+          document.querySelectorAll('.project-github-icon, .project-demo-icon, .project-freelance-icon').forEach(icon => {
+            const tooltip = icon.querySelector('.icon-tooltip');
+            if (tooltip) {
+              if (body.classList.contains('dark')) {
+                tooltip.style.backgroundColor = 'rgba(60, 60, 60, 0.95)';
+                tooltip.style.border = '1px solid rgba(255, 255, 255, 0.25)';
+              } else {
+                tooltip.style.backgroundColor = 'rgba(50, 50, 50, 0.95)';
+                tooltip.style.border = '1px solid rgba(255, 255, 255, 0.15)';
+              }
+              
+              // Force repaint
+              tooltip.style.opacity = '0.01';
+              setTimeout(() => {
+                tooltip.style.opacity = '0';
+              }, 10);
+            }
+          });
         }, 50);
       });
     }
@@ -302,11 +323,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const fragment = document.createDocumentFragment(); // Use fragment for better performance
       console.log('Projects data:', projects);
     
-    projects.forEach((project, index) => {
+      projects.forEach((project, index) => {
         console.log('Processing project:', index, project.title);
-      const projectElement = document.createElement('div');
+        const projectElement = document.createElement('div');
         projectElement.className = 'space-y-3 project-item';
-      projectElement.dataset.index = index;
+        projectElement.dataset.index = index;
         
         // Calculate visible and hidden skills counts
         const visibleSkillsCount = CONFIG.skills.visibleCount;
@@ -323,6 +344,35 @@ document.addEventListener('DOMContentLoaded', function() {
         DOM.projects.container.innerHTML = ''; // Clear any existing content first
         DOM.projects.container.appendChild(fragment);
         console.log('Projects appended to container:', DOM.projects.container.children.length, 'projects added');
+        
+        // Apply tooltip hover handlers immediately after DOM insertion
+        console.log('Applying tooltip hover handlers');
+        document.querySelectorAll('.project-github-icon, .project-demo-icon, .project-freelance-icon').forEach(icon => {
+          const tooltip = icon.querySelector('.icon-tooltip');
+          if (tooltip) {
+            // Add hover event handlers
+            icon.addEventListener('mouseenter', function() {
+              tooltip.style.opacity = '1';
+              tooltip.style.visibility = 'visible';
+              tooltip.style.transform = 'translateX(-50%) translateY(0)';
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+              tooltip.style.opacity = '0';
+              tooltip.style.visibility = 'hidden';
+              tooltip.style.transform = 'translateX(-50%) translateY(10px)';
+            });
+            
+            // Apply correct theme
+            if (document.body.classList.contains('dark')) {
+              tooltip.style.backgroundColor = 'rgba(60, 60, 60, 0.95)';
+              tooltip.style.border = '1px solid rgba(255, 255, 255, 0.25)';
+            } else {
+              tooltip.style.backgroundColor = 'rgba(50, 50, 50, 0.95)';
+              tooltip.style.border = '1px solid rgba(255, 255, 255, 0.15)';
+            }
+          }
+        });
       } else {
         console.error('Projects container not found!');
       }
@@ -348,21 +398,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const linksHTML = `
         <div class="flex items-center gap-0.5 ml-1">
           ${project.github ? `
-            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon" aria-label="View Source Code">
+            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon project-github-icon" aria-label="View Source Code" style="position:relative">
               <img src="public/icons/github.svg" alt="GitHub" class="h-3.5 w-3.5" width="14" height="14">
-              <div class="icon-tooltip">View Source Code</div>
+              <div class="icon-tooltip" style="position:absolute;bottom:135%;left:50%;transform:translateX(-50%) translateY(10px);background-color:rgba(50,50,50,0.95);color:white;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;z-index:9999;pointer-events:none;transition:all 0.2s ease;text-align:center;border:1px solid rgba(255,255,255,0.15);">View Source Code</div>
             </a>
           ` : ''}
           ${project.demo ? `
-            <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon" aria-label="View Live Demo">
+            <a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon project-demo-icon" aria-label="View Live Demo" style="position:relative">
               <img src="public/icons/link.svg" alt="Demo Link" class="h-3 w-3" width="12" height="12">
-              <div class="icon-tooltip">View Live Demo</div>
+              <div class="icon-tooltip" style="position:absolute;bottom:135%;left:50%;transform:translateX(-50%) translateY(10px);background-color:rgba(50,50,50,0.95);color:white;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;z-index:9999;pointer-events:none;transition:all 0.2s ease;text-align:center;border:1px solid rgba(255,255,255,0.15);">View Live Demo</div>
             </a>
           ` : ''}
           ${project.freelance ? `
-            <span class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon" aria-label="Freelance Project">
+            <span class="p-0.5 rounded-full hover:bg-white hover:bg-opacity-10 transition-colors project-icon project-freelance-icon" aria-label="Freelance Project" style="position:relative">
               <img src="public/icons/freelance.svg" alt="Freelance Project" class="h-3.5 w-3.5" width="14" height="14">
-              <div class="icon-tooltip">Freelance Project</div>
+              <div class="icon-tooltip" style="position:absolute;bottom:135%;left:50%;transform:translateX(-50%) translateY(10px);background-color:rgba(50,50,50,0.95);color:white;padding:5px 9px;border-radius:6px;font-size:11px;white-space:nowrap;opacity:0;visibility:hidden;z-index:9999;pointer-events:none;transition:all 0.2s ease;text-align:center;border:1px solid rgba(255,255,255,0.15);">Freelance Project</div>
             </span>
           ` : ''}
         </div>
@@ -604,99 +654,70 @@ document.addEventListener('DOMContentLoaded', function() {
      * This provides a more reliable way to make tooltips work in production
      */
     function initializeDirectTooltips() {
-      // Add event delegation to handle tooltips as they get added to the DOM
-      document.addEventListener('mouseover', function(e) {
-        // Check if the element or its parent is a project icon
-        const projectIcon = e.target.closest('.project-icon');
-        if (projectIcon) {
-          // Find or create the tooltip
-          let tooltip = projectIcon.querySelector('.icon-tooltip');
+      // Force create all project icon tooltips on page load
+      document.querySelectorAll('.project-icon').forEach(icon => {
+        // Mark as initialized to avoid re-processing
+        if (!icon.hasAttribute('data-tooltip-initialized')) {
+          icon.setAttribute('data-tooltip-initialized', 'true');
           
-          // If there's no tooltip but there's a data-tooltip attribute, create one
-          if (!tooltip && projectIcon.getAttribute('data-tooltip')) {
-            const tooltipText = projectIcon.getAttribute('data-tooltip');
-            tooltip = document.createElement('div');
-            tooltip.className = 'icon-tooltip';
-            tooltip.textContent = tooltipText;
-            projectIcon.appendChild(tooltip);
-            
-            // Make sure project icon is positioned correctly
-            projectIcon.style.position = 'relative';
+          // Ensure position is set properly
+          icon.style.position = 'relative';
+          icon.style.zIndex = '1';
+          
+          // Get tooltip content
+          let tooltipText;
+          if (icon.classList.contains('project-github-icon')) {
+            tooltipText = 'View Source Code';
+          } else if (icon.classList.contains('project-demo-icon')) {
+            tooltipText = 'View Live Demo';
+          } else if (icon.classList.contains('project-freelance-icon')) {
+            tooltipText = 'Freelance Project';
+          } else {
+            tooltipText = icon.getAttribute('aria-label') || icon.getAttribute('data-tooltip') || 'Info';
           }
           
-          // If we found or created a tooltip, show it
-          if (tooltip) {
-            tooltip.style.opacity = '1';
-            tooltip.style.visibility = 'visible';
-            tooltip.style.transform = 'translateX(-50%) translateY(0)';
+          // Get or create icon tooltip
+          let iconTooltip = icon.querySelector('.icon-tooltip');
+          if (!iconTooltip) {
+            iconTooltip = document.createElement('div');
+            iconTooltip.className = 'icon-tooltip';
+            iconTooltip.textContent = tooltipText;
+            icon.appendChild(iconTooltip);
           }
+          
+          // Set correct styles based on theme
+          if (document.body.classList.contains('dark')) {
+            iconTooltip.style.backgroundColor = 'rgba(60, 60, 60, 0.95)';
+            iconTooltip.style.border = '1px solid rgba(255, 255, 255, 0.25)';
+          } else {
+            iconTooltip.style.backgroundColor = 'rgba(50, 50, 50, 0.95)';
+            iconTooltip.style.border = '1px solid rgba(255, 255, 255, 0.15)';
+          }
+          
+          // Add direct event handlers
+          icon.addEventListener('mouseenter', function() {
+            iconTooltip.style.opacity = '1';
+            iconTooltip.style.visibility = 'visible';
+            iconTooltip.style.transform = 'translateX(-50%) translateY(0)';
+            icon.style.zIndex = '1001';
+          });
+          
+          icon.addEventListener('mouseleave', function() {
+            iconTooltip.style.opacity = '0';
+            iconTooltip.style.visibility = 'hidden';
+            iconTooltip.style.transform = 'translateX(-50%) translateY(10px)';
+            icon.style.zIndex = '1';
+          });
         }
-      }, true);
+      });
       
-      document.addEventListener('mouseout', function(e) {
-        // Check if the element or its parent is a project icon
-        const projectIcon = e.target.closest('.project-icon');
-        if (projectIcon) {
-          // Find the tooltip
-          const tooltip = projectIcon.querySelector('.icon-tooltip');
-          
-          // If there's a tooltip, hide it
-          if (tooltip) {
-            tooltip.style.opacity = '0';
-            tooltip.style.visibility = 'hidden';
-            tooltip.style.transform = 'translateX(-50%) translateY(10px)';
-          }
-        }
-      }, true);
-      
-      // Periodically check for project icons that might have been dynamically added
-      const checkForIcons = () => {
-        document.querySelectorAll('.project-icon').forEach(icon => {
-          // Only process icons that haven't been processed yet
-          if (!icon.dataset.tooltipInitialized) {
-            // Mark as initialized to avoid multiple processing
-            icon.dataset.tooltipInitialized = 'true';
-            
-            // Ensure icon has correct styling
-            icon.style.position = 'relative';
-            
-            // Handle direct icon tooltips
-            const iconTooltip = icon.querySelector('.icon-tooltip');
-            if (iconTooltip) {
-              // Apply correct theme based on current mode
-              if (document.body.classList.contains('dark')) {
-                iconTooltip.style.backgroundColor = 'rgba(60, 60, 60, 0.95)';
-                iconTooltip.style.border = '1px solid rgba(255, 255, 255, 0.25)';
-              } else {
-                iconTooltip.style.backgroundColor = 'rgba(50, 50, 50, 0.95)';
-                iconTooltip.style.border = '1px solid rgba(255, 255, 255, 0.15)';
-              }
-            }
-            // For data-tooltip attributes, try to convert them to direct tooltips
-            else if (icon.getAttribute('data-tooltip')) {
-              const tooltipText = icon.getAttribute('data-tooltip');
-              const tooltip = document.createElement('div');
-              tooltip.className = 'icon-tooltip';
-              tooltip.textContent = tooltipText;
-              
-              // Apply correct theme based on current mode
-              if (document.body.classList.contains('dark')) {
-                tooltip.style.backgroundColor = 'rgba(60, 60, 60, 0.95)';
-                tooltip.style.border = '1px solid rgba(255, 255, 255, 0.25)';
-              } else {
-                tooltip.style.backgroundColor = 'rgba(50, 50, 50, 0.95)';
-                tooltip.style.border = '1px solid rgba(255, 255, 255, 0.15)';
-              }
-              
-              icon.appendChild(tooltip);
-            }
-          }
+      // Run again after a delay to catch elements added after initial load
+      setTimeout(() => {
+        document.querySelectorAll('.project-icon:not([data-tooltip-initialized])').forEach(icon => {
+          icon.click(); // Force a layout recalculation with a harmless click
+          icon.setAttribute('data-tooltip-initialized', 'true');
         });
-      };
-      
-      // Run the check immediately and then periodically
-      checkForIcons();
-      setInterval(checkForIcons, 1000);
+      }, 1000);
     }
   
     /**

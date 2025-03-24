@@ -123,7 +123,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="styles.css?v=1.4">
+  <link rel="stylesheet" href="styles.css?v=1.6">
   
   <style>
     /* Ensure tooltips are visible */
@@ -197,6 +197,43 @@
       opacity: 1 !important;
       visibility: visible !important;
       transform: translateX(-50%) translateY(0) !important;
+    }
+    
+    /* Specific styles for project icon tooltips */
+    .project-github-icon .icon-tooltip,
+    .project-demo-icon .icon-tooltip,
+    .project-freelance-icon .icon-tooltip {
+      position: absolute !important;
+      bottom: 135% !important;
+      left: 50% !important;
+      transform: translateX(-50%) translateY(10px) !important;
+      background-color: rgba(50, 50, 50, 0.95) !important;
+      color: white !important;
+      padding: 5px 9px !important;
+      border-radius: 6px !important;
+      font-size: 11px !important;
+      white-space: nowrap !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      z-index: 2000 !important;
+      line-height: 1.4 !important;
+    }
+    
+    .project-github-icon:hover .icon-tooltip,
+    .project-demo-icon:hover .icon-tooltip,
+    .project-freelance-icon:hover .icon-tooltip {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateX(-50%) translateY(0) !important;
+    }
+    
+    .project-github-icon::before,
+    .project-github-icon::after,
+    .project-demo-icon::before,
+    .project-demo-icon::after,
+    .project-freelance-icon::before,
+    .project-freelance-icon::after {
+      display: none !important;
     }
   </style>
 </head>
@@ -362,6 +399,63 @@
       // Fallback timeout to ensure page displays even if load event doesn't fire properly
       setTimeout(handlePageLoad, 2500);
     }
+  </script>
+  
+  <!-- Tooltip fix script for project icons -->
+  <script>
+    // This script runs after everything else has loaded
+    window.addEventListener('load', function() {
+      // Give time for the main scripts to run
+      setTimeout(function() {
+        console.log("Running tooltip fix script");
+        
+        // Force tooltips on project icons
+        document.querySelectorAll('.project-github-icon, .project-demo-icon, .project-freelance-icon').forEach(function(icon) {
+          // Get the tooltip
+          const tooltip = icon.querySelector('.icon-tooltip');
+          if (tooltip) {
+            // Apply direct inline styles
+            tooltip.style.cssText = `
+              position: absolute !important;
+              bottom: 135% !important;
+              left: 50% !important;
+              transform: translateX(-50%) translateY(10px) !important;
+              background-color: ${document.body.classList.contains('dark') ? 'rgba(60, 60, 60, 0.95)' : 'rgba(50, 50, 50, 0.95)'} !important;
+              color: white !important;
+              padding: 5px 9px !important;
+              border-radius: 6px !important;
+              font-size: 11px !important;
+              white-space: nowrap !important;
+              opacity: 0 !important;
+              visibility: hidden !important;
+              z-index: 9999 !important;
+              pointer-events: none !important;
+              line-height: 1.4 !important;
+              border: 1px solid ${document.body.classList.contains('dark') ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255, 255, 255, 0.15)'} !important;
+            `;
+            
+            // Make sure positioning is set correctly
+            icon.style.position = 'relative';
+            icon.style.zIndex = '10';
+            
+            // Add direct event listeners
+            icon.onmouseenter = function() {
+              tooltip.style.opacity = '1';
+              tooltip.style.visibility = 'visible';
+              tooltip.style.transform = 'translateX(-50%) translateY(0)';
+              this.style.zIndex = '9999';
+            };
+            
+            icon.onmouseleave = function() {
+              tooltip.style.opacity = '0';
+              tooltip.style.visibility = 'hidden';
+              tooltip.style.transform = 'translateX(-50%) translateY(10px)';
+              this.style.zIndex = '10';
+            };
+          }
+        });
+      }, 2000); // 2 second delay
+    });
   </script>
 </body>
 </html>
