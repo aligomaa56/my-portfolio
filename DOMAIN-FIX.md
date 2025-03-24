@@ -32,16 +32,18 @@ Make sure your custom domain's DNS records are correctly pointing to Vercel:
 Run the included script to force a new deployment:
 
 ```bash
+# With default commit message "Update portfolio site"
 ./deploy.sh
+
+# Or with a custom commit message
+./deploy.sh "Fix domain configuration and icons"
 ```
 
-Or manually:
-
-```bash
-git add .
-git commit -m "Update domain configuration"
-git push
-```
+The script handles:
+- Adding all changed files
+- Creating a commit with your message (or default message)
+- Pushing to your repository
+- Triggering a new Vercel deployment
 
 ### 4. Purge the CDN cache
 
@@ -60,5 +62,6 @@ DNS changes can take up to 48 hours to fully propagate. In most cases, they shou
 - Use [whatsmydns.net](https://www.whatsmydns.net/) to check if your DNS has propagated
 - Make sure all asset paths in your code are relative (using `./`) instead of absolute paths
 - Check your browser cache - try viewing your site in incognito/private mode
+- If you've made changes to your site, always run the deployment script to ensure both domains receive the updates
 
 If issues persist after 48 hours, contact Vercel support. 
