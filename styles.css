@@ -686,37 +686,118 @@
 
   /* Additional tooltip container styling for better visibility */
   .tooltip-container {
-    position: relative;
+    position: relative !important;
   }
   
   .tooltip-container::after {
-    content: attr(data-tooltip);
+    content: attr(data-tooltip) !important;
+    position: absolute !important;
+    bottom: 135% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    background-color: rgba(50, 50, 50, 0.95) !important;
+    color: white !important;
+    padding: 5px 9px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease !important;
+    z-index: 1000 !important;
+    pointer-events: none !important;
+    line-height: 1.5 !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2) !important;
+    min-width: max-content !important;
+  }
+  
+  body.dark .tooltip-container::after {
+    background-color: rgba(60, 60, 60, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  }
+  
+  .tooltip-container:hover::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+  
+  /* Force project icons tooltips to work regardless of theme or other CSS rules */
+  .project-icon.tooltip-container::after {
+    bottom: 135% !important;
+    font-size: 11px !important;
+    padding: 5px 9px !important;
+    min-width: max-content !important;
+    max-width: 150px !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Ensure tooltips always work in production */
+  [data-tooltip].tooltip-container:hover::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  /* Project icon tooltip specific styles with higher specificity for production */
+  .project-title a.project-icon[data-tooltip]::after,
+  .project-title span.project-icon[data-tooltip]::after,
+  a.project-icon[data-tooltip]::after,
+  span.project-icon[data-tooltip]::after {
+    content: attr(data-tooltip) !important;
+    position: absolute !important;
+    bottom: 135% !important;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(10px) !important;
+    background-color: rgba(50, 50, 50, 0.95) !important;
+    color: white !important;
+    padding: 5px 9px !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+    white-space: nowrap !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    z-index: 1000 !important;
+    pointer-events: none !important;
+    transition: all 0.2s ease !important;
+    min-width: max-content !important;
+    max-width: 150px !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  }
+  
+  body.dark .project-title a.project-icon[data-tooltip]::after,
+  body.dark .project-title span.project-icon[data-tooltip]::after,
+  body.dark a.project-icon[data-tooltip]::after,
+  body.dark span.project-icon[data-tooltip]::after {
+    background-color: rgba(60, 60, 60, 0.95) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  }
+  
+  .project-title a.project-icon[data-tooltip]:hover::after,
+  .project-title span.project-icon[data-tooltip]:hover::after,
+  a.project-icon[data-tooltip]:hover::after,
+  span.project-icon[data-tooltip]:hover::after {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateX(-50%) translateY(0) !important;
+  }
+  
+  /* No-JS fallback for tooltips using title attribute */
+  .project-icon[title]:hover::before {
+    content: attr(title);
     position: absolute;
     bottom: 135%;
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    transform: translateX(-50%);
     background-color: rgba(50, 50, 50, 0.95);
     color: white;
     padding: 5px 9px;
     border-radius: 6px;
     font-size: 11px;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-    z-index: 1000;
-    pointer-events: none;
     line-height: 1.5;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  body.dark .tooltip-container::after {
-    background-color: rgba(60, 60, 60, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-  }
-  
-  .tooltip-container:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    white-space: nowrap;
+    z-index: 1000;
   }
