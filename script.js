@@ -110,6 +110,11 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       setupScrollReveal();
     }, 500);
+    
+    // Initialize tooltips after everything is loaded
+    setTimeout(() => {
+      initializeTooltips();
+    }, 1000);
   
     /**
      * Theme toggle functionality
@@ -377,6 +382,29 @@ document.addEventListener('DOMContentLoaded', function() {
       // Set up project detail toggles
       initializeProjectDetailToggle();
       
+      // Initialize tooltips for project icons
+      document.querySelectorAll('.project-icon').forEach(icon => {
+        // Force add tooltip-container class to ensure it works in production
+        if (icon.getAttribute('data-tooltip') && !icon.classList.contains('tooltip-container')) {
+          icon.classList.add('tooltip-container');
+        }
+        
+        // Ensure position is set for tooltip positioning
+        icon.style.position = 'relative';
+        
+        // Add stronger hover effect
+        icon.addEventListener('mouseenter', function() {
+          this.style.position = 'relative';
+          this.style.zIndex = '1001';
+          
+          // Force recalculation
+          const tooltip = this.getAttribute('data-tooltip');
+          if (tooltip) {
+            this.style.setProperty('--tooltip-text', '"' + tooltip + '"', 'important');
+          }
+        });
+      });
+      
       // Prevent link clicks from toggling project
       document.querySelectorAll('.project-item a').forEach(link => {
         link.addEventListener('click', function(e) {
@@ -553,4 +581,78 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }, 50);
     });
+    
+    /**
+     * Initialize tooltips with greater compatibility for production
+     */
+    function initializeTooltips() {
+      // Find all elements with data-tooltip attribute
+      const tooltipElements = document.querySelectorAll('[data-tooltip]');
+      
+      tooltipElements.forEach(element => {
+        // Make sure position is relative for tooltip positioning
+        element.style.position = 'relative';
+        
+        // Add tooltip-container class if it doesn't have it
+        if (!element.classList.contains('tooltip-container')) {
+          element.classList.add('tooltip-container');
+        }
+        
+        // Create a stronger interaction
+        element.addEventListener('mouseenter', function() {
+          // Force a style recalculation to ensure tooltip appears
+          this.style.position = 'relative';
+          if (this.getAttribute('data-tooltip') && !this.querySelector('.force-tooltip')) {
+            const tooltipText = this.getAttribute('data-tooltip');
+            
+            // Add inline style for critical properties
+            this.style.setProperty('--tooltip-text', '"' + tooltipText + '"');
+            this.style.setProperty('z-index', '1000', 'important');
+          }
+        });
+      });
+      
+      // Special handling for project icons with enhanced performance
+      const projectIcons = document.querySelectorAll('.project-icon');
+      console.log('Found project icons:', projectIcons.length);
+      
+      projectIcons.forEach(icon => {
+        if (icon.getAttribute('data-tooltip')) {
+          // Ensure tooltip-container class is present
+          if (!icon.classList.contains('tooltip-container')) {
+            icon.classList.add('tooltip-container');
+          }
+          
+          // Set essential inline styles for tooltip positioning
+          icon.style.position = 'relative';
+          
+          // Create inline tooltip element for maximum compatibility
+          const tooltipText = icon.getAttribute('data-tooltip');
+          icon.setAttribute('title', tooltipText); // Fallback for browsers
+          
+          // Use data attributes to store tooltip position values
+          icon.setAttribute('data-tooltip-active', 'false');
+          
+          // Add stronger hover effect with performance optimization
+          icon.addEventListener('mouseenter', function() {
+            // Only force recalculation if needed (throttling)
+            if (this.getAttribute('data-tooltip-active') !== 'true') {
+              this.style.position = 'relative';
+              this.style.zIndex = '1001';
+              this.setAttribute('data-tooltip-active', 'true');
+              
+              // Force tooltip text to be defined
+              this.style.setProperty('--tooltip-text', '"' + tooltipText + '"', 'important');
+            }
+          });
+          
+          icon.addEventListener('mouseleave', function() {
+            this.setAttribute('data-tooltip-active', 'false');
+            this.style.zIndex = '';
+          });
+        }
+      });
+      
+      console.log('Initialized tooltips for', tooltipElements.length, 'elements');
+    }
   });
